@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}生命周期详情分析 - 电商用户分析系统{% endblock %}
+{% block content %}
+<div class="panel">
+  <h2>用户生命周期阶段详情</h2>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>任期阶段</th>
+        <th>总用户数</th>
+        <th>流失人数</th>
+        <th>流失率</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for item in segments %}
+    <tr>
+      <td>{{ item.stage }}</td>
+      <td>{{ item.total_user }}</td>
+      <td>{{ item.churn_user }}</td>
+      <td>{{ item.churn_rate }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="analysis-tip">
+    <h3>数据观察结论</h3>
+    <p>新用户群体流失率达到53.5%，508名新用户中有272人发生流失，是全生命周期流失风险最高人群；随着用户使用周期拉长流失持续降低，24个月以上老用户流失率为0，长期留存稳定性极强。</p>
+  </div>
+
+
+  <!-- 返回看板，完成双向跳转 -->
+  <a href="{{ url_for('dashboard') }}" class="back-btn">← 返回数据看板</a>
+</div>
+{% endblock %}
